@@ -1,6 +1,7 @@
 package com.leopoldodev.bookstore.services;
 
 import com.leopoldodev.bookstore.domain.Category;
+import com.leopoldodev.bookstore.exceptions.ObjectNotFoundException;
 import com.leopoldodev.bookstore.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,6 @@ public class CategoryService {
 
     public final Category findById(Integer id){
         Optional<Category> obj = categoryRepository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Category not found id: " + id));
     }
 }
