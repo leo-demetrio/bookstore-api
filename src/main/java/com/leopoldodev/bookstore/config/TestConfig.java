@@ -26,6 +26,8 @@ public class TestConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        bookRepository.deleteAll();
+        categoryRepository.deleteAll();
         Category c1 = new Category(null, "books", "books programing");
         Book b1 = new Book(null, "Java", "Deitel", "Java with programing", c1);
 
