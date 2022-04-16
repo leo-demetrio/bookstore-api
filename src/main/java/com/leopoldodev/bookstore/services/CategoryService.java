@@ -1,7 +1,6 @@
 package com.leopoldodev.bookstore.services;
 
 import com.leopoldodev.bookstore.domain.Category;
-import com.leopoldodev.bookstore.dto.CategoryDTO;
 import com.leopoldodev.bookstore.exceptions.ObjectNotFoundException;
 import com.leopoldodev.bookstore.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,5 +32,8 @@ public class CategoryService {
         categoryBank.setName(category.getName());
         categoryBank.setDescription(category.getDescription());
         return categoryRepository.save(categoryBank);
+    }
+    public void delete(Integer id){
+        categoryRepository.delete(findById(id));
     }
 }
