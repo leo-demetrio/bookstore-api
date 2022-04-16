@@ -1,6 +1,7 @@
 package com.leopoldodev.bookstore.services;
 
 import com.leopoldodev.bookstore.domain.Category;
+import com.leopoldodev.bookstore.exceptions.DataIntegrityViolationException;
 import com.leopoldodev.bookstore.exceptions.ObjectNotFoundException;
 import com.leopoldodev.bookstore.repositories.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,11 @@ public class CategoryService {
         return categoryRepository.save(categoryBank);
     }
     public void delete(Integer id){
-        categoryRepository.delete(findById(id));
+        try{
+            categoryRepository.delete(findById(id));
+        }catch(org.springframework.dao.DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("Not possible delete, levels associates");
+        }
+
     }
 }
