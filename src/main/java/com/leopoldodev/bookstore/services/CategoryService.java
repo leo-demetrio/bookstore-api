@@ -28,4 +28,10 @@ public class CategoryService {
         category.setId(null);
         return categoryRepository.save(category);
     }
+    public Category update(Integer id, Category category){
+        Category categoryBank = findById(id);
+        categoryBank.setName(category.getName());
+        categoryBank.setDescription(category.getDescription());
+        return categoryRepository.save(categoryBank);
+    }
 }
