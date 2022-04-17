@@ -9,12 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin("*")
 @RestController
-@RequestMapping(value = "/categories")
+@RequestMapping(value = "/v1/categories")
 @RequiredArgsConstructor
 public class CategoryResource {
 
@@ -34,13 +36,13 @@ public class CategoryResource {
     }
 
     @PostMapping
-    public ResponseEntity<Category> create(@RequestBody Category category){
+    public ResponseEntity<Category> create(@Valid @RequestBody Category category){
         Category obj = categoryService.create(category);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<CategoryDTO> update(@PathVariable Integer id, @RequestBody Category category){
+    public ResponseEntity<CategoryDTO> update(@PathVariable Integer id, @Valid @RequestBody Category category){
         Category categoryUpdate = categoryService.update(id, category);
         return ResponseEntity.ok().body(new CategoryDTO(categoryUpdate));
     }
