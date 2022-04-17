@@ -9,12 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin("*")
 @RestController
-@RequestMapping(value = "/books")
+@RequestMapping(value = "/v1/books")
 @RequiredArgsConstructor
 public class BookResource {
 
@@ -34,18 +36,18 @@ public class BookResource {
 
     @PostMapping
     public ResponseEntity<Book> create(@RequestParam(value = "category", defaultValue = "0") Integer id_category,
-                                       @RequestBody Book book){
+                                       @Valid @RequestBody Book book){
         Book obj = bookService.create(book, id_category);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("books/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<BookDTO> update(@PathVariable Integer id, @RequestBody Book book){
+    public ResponseEntity<BookDTO> update(@PathVariable Integer id,@Valid  @RequestBody Book book){
         Book bookUpdate = bookService.update(id, book);
         return ResponseEntity.ok().body(new BookDTO(bookUpdate));
     }
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<BookDTO> updatePatch(@PathVariable Integer id, @RequestBody Book book){
+    public ResponseEntity<BookDTO> updatePatch(@PathVariable Integer id, @Valid @RequestBody Book book){
         Book bookUpdate = bookService.update(id, book);
         return ResponseEntity.ok().body(new BookDTO(bookUpdate));
     }

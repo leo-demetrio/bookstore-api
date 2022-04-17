@@ -2,7 +2,6 @@ package com.leopoldodev.bookstore.services;
 
 import com.leopoldodev.bookstore.domain.Book;
 import com.leopoldodev.bookstore.domain.Category;
-import com.leopoldodev.bookstore.exceptions.DataIntegrityViolationException;
 import com.leopoldodev.bookstore.exceptions.ObjectNotFoundException;
 import com.leopoldodev.bookstore.repositories.BookRepository;
 import lombok.RequiredArgsConstructor;
