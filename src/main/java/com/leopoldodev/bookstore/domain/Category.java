@@ -24,11 +24,11 @@ public class Category implements Serializable {
     private Integer id;
 
     @NotEmpty(message = "Required name")
-    @Length(min = 3, max = 20,message = "Field with min 3 characters and max 15 characters")
+    @Length(min = 3, max = 20,message = "Field name with  min 3 characters and max 15 characters")
     private String name;
 
     @NotEmpty(message = "Required name")
-    @Length(min = 3, max = 200,message = "Field with min 15 characters and max 200 characters")
+    @Length(min = 3, max = 200,message = "Field description with min 15 characters and max 200 characters")
     private String description;
 
     @OneToMany(mappedBy = "category")
